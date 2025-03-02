@@ -1,29 +1,33 @@
 package com.example.GerenciadorTarefas.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "tarefas")
-public class Tarefa {
+public class TarefaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
+    @JsonProperty("title")
     private String titulo;
 
+    @JsonProperty("description")
     private String descricao;
 
+    @JsonProperty("completed")
     @Column(nullable = false)
     private boolean completo = false;
 
-    public Tarefa() {
+    public TarefaEntity() {
     }
 
-    public Tarefa(boolean completo, String descricao, Long id, String titulo) {
+    public TarefaEntity(boolean completo, String descricao, Long id, String titulo) {
         this.completo = completo;
         this.descricao = descricao;
         this.id = id;
@@ -66,8 +70,8 @@ public class Tarefa {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tarefa tarefa = (Tarefa) o;
-        return Objects.equals(id, tarefa.id);
+        TarefaEntity tarefaEntity = (TarefaEntity) o;
+        return Objects.equals(id, tarefaEntity.id);
     }
 
     @Override
